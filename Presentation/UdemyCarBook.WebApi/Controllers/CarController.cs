@@ -12,7 +12,8 @@ public class CarController(
     UpdateCarCommandHandler _updateCarCommandHandler,
     RemoveCarCommandHandler _removeCarCommandHandler,
     GetCarByIdQueryHandler _getCarByIdQueryHandler,
-    GetCarQueryHandler _getCarQueryHandler) : ControllerBase
+    GetCarQueryHandler _getCarQueryHandler,
+    GetCarWithBrandQueryHandler _getCarWithBrandQueryHandler) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> CarList()
@@ -47,5 +48,12 @@ public class CarController(
     {
         await _updateCarCommandHandler.Handle(command);
         return Ok("araba güncellendi");
+    }
+
+    [HttpGet("GetCarWithBrand")]
+    public IActionResult GetCarWithBrand()
+    {
+        var values=_getCarWithBrandQueryHandler.Handle();
+        return Ok(values);
     }
 }
