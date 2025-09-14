@@ -1,19 +1,17 @@
 ﻿using UdemyCarBook.Application.Features.CQRS.Results.CarResults;
-using UdemyCarBook.Application.Interfaces;
 using UdemyCarBook.Application.Interfaces.CarInterfaces;
-using UdemyCarBook.Domain.Entities;
 
 namespace UdemyCarBook.Application.Features.CQRS.Handlers.CarHandlers;
 
-public class GetCarWithBrandQueryHandler(ICarRepository _repository)
+public class GetLast5CarWithBrandQueryHandler(ICarRepository _repository)
 {
     public List<GetCarWithBrandQueryResult> Handle()
     {
-        var values= _repository.GetCarListWithBrands();
-        return values.Select(x=>new GetCarWithBrandQueryResult
+        var values = _repository.GetLast5CarListWithBrands();
+        return values.Select(x => new GetCarWithBrandQueryResult
         {
             CarId=x.CarId,
-            BrandName=x.Brand.Name,
+            BrandName = x.Brand.Name,
             BrandId = x.BrandId,
             Model = x.Model,
             CoverImageUrl = x.CoverImageUrl,

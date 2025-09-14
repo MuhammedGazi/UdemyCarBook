@@ -13,7 +13,8 @@ public class CarController(
     RemoveCarCommandHandler _removeCarCommandHandler,
     GetCarByIdQueryHandler _getCarByIdQueryHandler,
     GetCarQueryHandler _getCarQueryHandler,
-    GetCarWithBrandQueryHandler _getCarWithBrandQueryHandler) : ControllerBase
+    GetCarWithBrandQueryHandler _getCarWithBrandQueryHandler,
+    GetLast5CarWithBrandQueryHandler _getLast5CarWithBrandQueryHandler) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> CarList()
@@ -54,6 +55,13 @@ public class CarController(
     public IActionResult GetCarWithBrand()
     {
         var values=_getCarWithBrandQueryHandler.Handle();
+        return Ok(values);
+    }
+
+    [HttpGet("GetLast5CarWithBrandQueryHandler")]
+    public IActionResult GetLast5CarWithBrandQueryHandler()
+    {
+        var values = _getLast5CarWithBrandQueryHandler.Handle();
         return Ok(values);
     }
 }
