@@ -1,12 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using UdemyCarBook.Dto.AuthorDtos;
+using UdemyCarBook.Dto.TagCloudDtos;
 
 namespace UdemyCarBook.WebUI.ViewComponents.BlogViewComponents
 {
-    public class _BlogDetailsAuthorAboutComponentPartial:ViewComponent
+    public class _BlogDetailsAuthorAboutComponentPartial(ApiService _apiService):ViewComponent
     {
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync(int id)
         {
-            return View();
+            ViewBag.blogid = id;    
+            var value=await _apiService.GetApiAsync<List<GetAuthorByBlogAuthorIdDto>>($"https://localhost:7243/api/Blog/GetBlogByAuthorId?id=" + id);
+            return View(value);
         }
     }
 }

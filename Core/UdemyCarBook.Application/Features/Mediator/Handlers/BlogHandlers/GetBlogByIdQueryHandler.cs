@@ -18,6 +18,7 @@ public class GetBlogByIdQueryHandler(IRepositor<Blog> _repository) : IRequestHan
             CategoryID = value.CategoryID,
             CoverImageUrl = value.CoverImageUrl,
             CreatedDate = value.CreatedDate,
+            Description=value.Description,
             Title = value.Title,
         };
     }

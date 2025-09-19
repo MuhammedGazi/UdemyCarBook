@@ -20,6 +20,8 @@ public class GetAllBlogsWithAuthorsQueryHandler(IBlogRepository _repository) : I
             CreatedDate=x.CreatedDate,
             Title=x.Title, 
             Description=x.Description,
+            AuthorDescription=x.Author.Description,
+            AuthorImageUrl=x.Author.ImageUrl
         }).ToList();
     }
 }

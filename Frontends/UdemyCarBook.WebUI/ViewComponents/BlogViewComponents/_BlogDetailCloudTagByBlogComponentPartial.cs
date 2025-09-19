@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using UdemyCarBook.Dto.BlogDtos;
+using UdemyCarBook.Dto.TagCloudDtos;
 
 namespace UdemyCarBook.WebUI.ViewComponents.BlogViewComponents
 {
-    public class _BlogDetailCloudTagByBlogComponentPartial:ViewComponent
+    public class _BlogDetailCloudTagByBlogComponentPartial(ApiService _apiService):ViewComponent
     {
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync(int id)
         {
-            return View();
+            var value = await _apiService.GetApiAsync<List<GetByBlogIdTagCloudDto>>($"https://localhost:7243/api/TagCloud/GetTagCloudByBlogId?id=" + id);
+            return View(value);
         }
     }
 }

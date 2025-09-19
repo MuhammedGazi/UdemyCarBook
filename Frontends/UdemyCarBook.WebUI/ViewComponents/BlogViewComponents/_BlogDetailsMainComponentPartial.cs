@@ -8,8 +8,8 @@ namespace UdemyCarBook.WebUI.ViewComponents.BlogViewComponents
     {
         public async Task<IViewComponentResult> InvokeAsync(int id)
         {
-            var value = await _apiService.GetApiAsync<GetBlogById>($"https://localhost:7243/api/Blogs/" + id);
-            return View();
+            var value = await _apiService.GetApiAsync<GetBlogById>($"https://localhost:7243/api/Blog/" + id);
+            return View(value);
         }
     }
 }

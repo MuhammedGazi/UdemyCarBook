@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Mvc;
 using UdemyCarBook.Application.Features.Mediator.Commands.TagCloudCommands;
 using UdemyCarBook.Application.Features.Mediator.Queries.TagCloudQueries;
@@ -42,6 +43,13 @@ public class TagCloudController(IMediator _mediator) : ControllerBase
     {
         await _mediator.Send(new RemoveTagCloudCommand(id));
         return Ok("etiket silindi");
+    }
+
+    [HttpGet("GetTagCloudByBlogId")]
+    public async Task<IActionResult> GetTagCloudByBlogId(int id)
+    {
+        var value = await _mediator.Send(new GetTagCloudByBlogIdQuery(id));
+        return Ok(value);
     }
 
 }
