@@ -39,6 +39,7 @@ public class ApiService
         var jsonData = JsonConvert.SerializeObject(dto);
         StringContent stringcontent = new StringContent(jsonData, Encoding.UTF8, "application/json");
         var responseMessage = await _httpClient.PutAsync(url, stringcontent);
+        var responseString = await responseMessage.Content.ReadAsStringAsync();
         responseMessage.EnsureSuccessStatusCode();
     }
 }

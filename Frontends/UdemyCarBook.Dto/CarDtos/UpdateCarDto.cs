@@ -4,7 +4,6 @@ namespace UdemyCarBook.Dto.CarDtos;
 
 public class UpdateCarDto
 {
-    [JsonPropertyName("carId")]
     public int CarId { get; set; }
     public int BrandID { get; set; }
     public string Model { get; set; }
@@ -14,5 +13,5 @@ public class UpdateCarDto
     public byte Seat { get; set; }
     public byte Luggage { get; set; }
     public string Fuel { get; set; }
-    public string BigImageUrl { get; set; }
+    public string BıgImageUrl { get; set; }
 }

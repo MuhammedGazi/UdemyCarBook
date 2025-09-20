@@ -12,6 +12,7 @@ public class GetCarByIdQueryHandler(IRepositor<Car> _repository)
         var value=await _repository.GetByIdAsync(query.Id);
         return new GetCarByIdQueryResult
         {
+            CarId = value.CarId,
             BrandId = value.BrandId,
             Model = value.Model,
             CoverImageUrl = value.CoverImageUrl,

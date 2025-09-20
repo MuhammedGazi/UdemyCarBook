@@ -35,7 +35,7 @@ public class BrandController(
         return Ok("marka eklendi");
     }
 
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> RemoveBrand(int id)
     {
         await _removeBrandCommandHandler.Handle(new RemoveBrandCommand(id));

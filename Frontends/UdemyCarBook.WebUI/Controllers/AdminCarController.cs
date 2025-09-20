@@ -59,7 +59,7 @@ public class AdminCarController(ApiService _apiService) : Controller
     [HttpPost]
     public async Task<IActionResult> UpdateCar(UpdateCarDto dto)
     {
-        await _apiService.PutApiAsync("https://localhost:7243/api/Car/", dto);
+        await _apiService.PutApiAsync($"https://localhost:7243/api/Car/", dto);
         return RedirectToAction("Index");
     }
 }
