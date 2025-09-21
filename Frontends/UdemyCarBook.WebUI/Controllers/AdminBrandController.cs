@@ -28,12 +28,12 @@ public class AdminBrandController(ApiService _apiService) : Controller
     public async Task<IActionResult> UpdateBrand(int id)
     {
         var value = await _apiService.GetApiAsync<UpdateBrandDto>($"https://localhost:7243/api/Brand/{id}");
-        return View();
+        return View(value);
     }
     [HttpPost]
     public async Task<IActionResult> UpdateBrand(UpdateBrandDto dto)
     {
-        await _apiService.PostApiAsync("https://localhost:7243/api/Brand", dto);
+        await _apiService.PutApiAsync("https://localhost:7243/api/Brand", dto);
         return RedirectToAction("Index");
     }
 
