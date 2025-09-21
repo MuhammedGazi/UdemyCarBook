@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using UdemyCarBook.Dto.FooterAddressDtos;
+using UdemyCarBook.Dto.LocationDtos;
 
 namespace UdemyCarBook.WebUI.ViewComponents.FooterAddressComponents
 {
@@ -14,7 +15,7 @@ namespace UdemyCarBook.WebUI.ViewComponents.FooterAddressComponents
             if(responseData.IsSuccessStatusCode)
             {
                 var jsonData=await responseData.Content.ReadAsStringAsync();
-                var values=JsonConvert.DeserializeObject<List<ResultFooterAddressDto>>(jsonData);
+                var values=JsonConvert.DeserializeObject<List<ResultLocationDto>>(jsonData);
                 return View(values);
             }
             return View();
