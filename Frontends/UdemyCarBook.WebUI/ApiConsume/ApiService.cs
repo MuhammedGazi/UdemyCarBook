@@ -25,12 +25,14 @@ public class ApiService
         var jsonData = JsonConvert.SerializeObject(data);
         StringContent stringcontent = new StringContent(jsonData,Encoding.UTF8,"application/json");
         var responseMessage = await _httpClient.PostAsync(url,stringcontent);
+        var responseString = await responseMessage.Content.ReadAsStringAsync();
         responseMessage.EnsureSuccessStatusCode();
     }
 
     public async Task RemoveApiAsync(string url)
     {
         var responseMessage = await _httpClient.DeleteAsync(url);
+        var responseString = await responseMessage.Content.ReadAsStringAsync();
         responseMessage.EnsureSuccessStatusCode();
     }
 

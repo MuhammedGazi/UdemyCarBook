@@ -1,6 +1,9 @@
-﻿namespace UdemyCarBook.Dto.ReservationDtos;
+﻿using MediatR;
+using UdemyCarBook.Domain.Entities;
 
-public class CreateReservationDto
+namespace UdemyCarBook.Application.Features.Mediator.Commands.ReservationCommands;
+
+public class CreateReservationCommand:IRequest
 {
     public string Name { get; set; }
     public string Surname { get; set; }
@@ -12,5 +15,4 @@ public class CreateReservationDto
     public int Age { get; set; }
     public int DriverLicenseYear { get; set; }
     public string Description { get; set; }
-
 }
