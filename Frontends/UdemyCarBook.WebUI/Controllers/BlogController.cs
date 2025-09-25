@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using UdemyCarBook.Dto.AboutDtos;
 using UdemyCarBook.Dto.BlogDtos;
+using UdemyCarBook.Dto.CommentDtos;
 
 namespace UdemyCarBook.WebUI.Controllers;
 
-public class BlogController(IHttpClientFactory _httpClientFactory) : Controller
+public class BlogController(IHttpClientFactory _httpClientFactory,ApiService _apiService) : Controller
 {
     public async Task<IActionResult> Index()
     {
@@ -28,5 +30,18 @@ public class BlogController(IHttpClientFactory _httpClientFactory) : Controller
         ViewBag.v2 = "Blog Detayı ve Yorumlar";
         ViewBag.blogid = id;
         return View();
+    }
+
+    [HttpGet]
+    public  PartialViewResult AddComment(int id)
+    {
+        ViewBag.blogid = id;
+        return PartialView();
+    }
+    [HttpPost]
+    public async Task<IActionResult> AddComment(CreateCommentDto dto)
+    {
+        await _apiService.PostApiAsync("https://localhost:7243/api/Comment/CreateCommentWithMediator", dto);
+        return RedirectToAction("Index","Default");
     }
 }

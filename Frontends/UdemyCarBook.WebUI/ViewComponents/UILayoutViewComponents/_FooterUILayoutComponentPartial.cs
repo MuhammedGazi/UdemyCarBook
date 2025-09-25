@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using UdemyCarBook.Dto.FooterAddressDtos;
 
 namespace UdemyCarBook.WebUI.ViewComponents.UILayoutViewComponents
 {
-    public class _FooterUILayoutComponentPartial:ViewComponent
+    public class _FooterUILayoutComponentPartial(ApiService _apiService):ViewComponent
     {
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View();
+            var values = await _apiService.GetApiAsync<List<ResultFooterAddressDto>>("https://localhost:7243/api/FooterAddress");
+            return View(values);
         }
     }
 }
