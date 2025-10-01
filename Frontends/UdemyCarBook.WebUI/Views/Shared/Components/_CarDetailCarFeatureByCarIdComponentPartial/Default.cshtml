@@ -1,0 +1,44 @@
+﻿@model List<ResultCarFeatureByCarIdDto>
+@*
+    _CarDetailCarFeatureByCarIdComponentPartial
+*@
+
+
+<div class="tab-pane fade show active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
+	<div class="row">
+
+		@{
+			int counter = 0;
+		}
+
+		<div class="col-md-4">
+			<ul class="features">
+
+				@foreach (var item in Model)
+				{
+					if (counter > 0 && counter % 5 == 0)
+					{
+						@:</ul>
+						@:</div>
+
+						@:<div class="col-md-4">
+						@:<ul class="features">
+					}
+
+					if (item.Available == true)
+					{
+						<li class="check"><span class="ion-ios-checkmark"></span>@item.FeatureName</li>
+					}
+					else
+					{
+						<li class="remove"><span class="ion-ios-close"></span>@item.FeatureName</li>
+					}
+
+					counter++;
+				}
+
+			</ul>
+		</div>
+
+	</div>
+</div>

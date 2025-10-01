@@ -44,4 +44,10 @@ public class ApiService
         var responseString = await responseMessage.Content.ReadAsStringAsync();
         responseMessage.EnsureSuccessStatusCode();
     }
+
+    public async Task ExecuteApiAsync(string url)
+    {
+        var response = await _httpClient.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+    }
 }

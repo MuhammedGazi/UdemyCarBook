@@ -599,6 +599,42 @@ namespace UdemyCarBook.Persistence.Migrations
                     b.ToTable("Reservations");
                 });
 
+            modelBuilder.Entity("UdemyCarBook.Domain.Entities.Review", b =>
+                {
+                    b.Property<int>("ReviewID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReviewID"));
+
+                    b.Property<int>("CarID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RatıngValue")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReviewDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ReviewID");
+
+                    b.HasIndex("CarID");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("UdemyCarBook.Domain.Entities.Service", b =>
                 {
                     b.Property<int>("ServiceID")
@@ -851,6 +887,17 @@ namespace UdemyCarBook.Persistence.Migrations
                     b.Navigation("PickUpLocation");
                 });
 
+            modelBuilder.Entity("UdemyCarBook.Domain.Entities.Review", b =>
+                {
+                    b.HasOne("UdemyCarBook.Domain.Entities.Car", "Car")
+                        .WithMany("reviews")
+                        .HasForeignKey("CarID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Car");
+                });
+
             modelBuilder.Entity("UdemyCarBook.Domain.Entities.TagCloud", b =>
                 {
                     b.HasOne("UdemyCarBook.Domain.Entities.Blog", "Blog")
@@ -892,6 +939,8 @@ namespace UdemyCarBook.Persistence.Migrations
                     b.Navigation("RentACars");
 
                     b.Navigation("Reservations");
+
+                    b.Navigation("reviews");
                 });
 
             modelBuilder.Entity("UdemyCarBook.Domain.Entities.Category", b =>

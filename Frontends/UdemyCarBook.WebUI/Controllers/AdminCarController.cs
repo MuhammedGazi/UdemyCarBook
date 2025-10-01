@@ -62,4 +62,5 @@ public class AdminCarController(ApiService _apiService) : Controller
         await _apiService.PutApiAsync($"https://localhost:7243/api/Car/", dto);
         return RedirectToAction("Index");
     }
+
 }
