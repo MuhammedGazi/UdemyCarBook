@@ -1,8 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using UdemyCarBook.Application.Features.Mediator.Commands.ReviewCommands;
+using UdemyCarBook.Application.Features.Mediator.Commands.ServiceCommands;
 using UdemyCarBook.Application.Features.Mediator.Queries.LocationQueries;
 using UdemyCarBook.Application.Features.Mediator.Queries.ReviewQueries;
+using UdemyCarBook.Application.Validators.ReviewValidators;
 
 namespace UdemyCarBook.WebApi.Controllers
 {
@@ -15,6 +18,26 @@ namespace UdemyCarBook.WebApi.Controllers
         {
             var values = await _mediator.Send(new GetReviewByCarIDQuery(id));
             return Ok(values);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateReview(CreateReviewCommand command)
+        {
+            CreateReviewValidator validator=new CreateReviewValidator();
+            var validationResult=validator.Validate(command);
+            if(!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
+            await _mediator.Send(command);
+            return Ok("yorum eklendi");
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateReview(UpdateReviewCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok("yorum güncellendi");
         }
     }
 }
