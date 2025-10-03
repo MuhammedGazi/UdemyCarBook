@@ -13,9 +13,6 @@
 <p align="center">
   <img src="https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet" alt=".NET 8">
   <img src="https://img.shields.io/badge/Mimari-Soğan-8A2BE2" alt="Onion Architecture">
-  <a href="https://github.com/MuhammedGazi/CarBook/actions">
-    <img src="https://github.com/MuhammedGazi/CarBook/actions/workflows/dotnet.yml/badge.svg" alt="Build Status">
-  </a>
   <a href="https://github.com/MuhammedGazi/CarBook/issues">
     <img src="https://img.shields.io/github/issues/MuhammedGazi/CarBook" alt="GitHub issues">
   </a>
