@@ -1,4 +1,3 @@
-🚗 CarBook - Araç Kiralama Platformu
 <h3 align="center">CarBook</h3>
 
 <p align="center">
@@ -18,6 +17,7 @@
   </a>
   <img src="https://img.shields.io/badge/lisans-MIT-green" alt="Lisans">
 </p>
+🚗 CarBook - Araç Kiralama Platformu
 CarBook, modern .NET teknolojileri ve en iyi yazılım mimarisi pratikleri kullanılarak geliştirilmiş, kapsamlı bir araç kiralama projesidir. Bu proje, ASP.NET Core 8'in gücünü Soğan Mimarisi (Onion Architecture) ile birleştirerek ölçeklenebilir, sürdürülebilir ve test edilebilir bir uygulama sunmayı hedefler.
 
 📝 Proje Hakkında
