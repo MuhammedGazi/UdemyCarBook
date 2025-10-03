@@ -10,6 +10,8 @@ public class CarBookContext : DbContext
         optionsBuilder.UseSqlServer("server=DESKTOP-GLCB4AC;database=UdemyCarBookDB;integrated security=true;Encrypt=False;");
     }
 
+    public DbSet<AppUser> AppUsers { get; set; }
+    public DbSet<AppRole> AppRoles { get; set; }
     public DbSet<About> Abouts { get; set; }
     public DbSet<Banner> Banners { get; set; }
     public DbSet<Brand> Brands { get; set; }

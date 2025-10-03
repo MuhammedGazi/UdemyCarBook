@@ -1,23 +1,35 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net.Http.Headers;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 using UdemyCarBook.Dto.LocationDtos;
 
 namespace UdemyCarBook.WebUI.Controllers
 {
-    public class DefaultController(ApiService _apiService) : Controller
+    public class DefaultController(ApiService _apiService,IHttpClientFactory _httpClientFactory) : Controller
     {
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var values = await _apiService.GetApiAsync<List<ResultLocationDto>>("https://localhost:7243/api/Location");
-            List<SelectListItem> values2=(from x in values
-                                          select new SelectListItem
-                                          {
-                                              Text=x.Name,
-                                              Value=x.LocationID.ToString(),
-                                          }).ToList();
-            ViewBag.v=values2;
+            var token = User.Claims.FirstOrDefault(x => x.Type == "carbooktoken")?.Value;
+            if (token != null)
+            {
+                var client = _httpClientFactory.CreateClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var responseMessage = await client.GetAsync("https://localhost:7243/api/Location");
+
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<ResultLocationDto>>(jsonData);
+                List<SelectListItem> values2 = (from x in values
+                                                select new SelectListItem
+                                                {
+                                                    Text = x.Name,
+                                                    Value = x.LocationID.ToString()
+                                                }).ToList();
+                ViewBag.v = values2;
+            }
             return View();
         }
         [HttpPost]
